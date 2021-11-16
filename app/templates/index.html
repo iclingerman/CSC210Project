@@ -1,0 +1,9 @@
+{% include "base.html" %}
+
+<head>
+    <title>{{ title }} | EZWeek</title>
+</head>
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}! Here are your calendars...</h1>
+{% endblock %}
