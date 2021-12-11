@@ -1,14 +1,115 @@
 
-/* .fieldset {
-    
-} */
-
-a {
-    background-color: rgb(211, 211, 211);
-    padding: 5px;
-    margin: 5px
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+label {
+    margin: 0;
+    padding: 0;
+}
+
 
 fieldset {
-    margin: 10px
+    margin: 10px;
 }
+
+#home-menu {
+    background-color: cadetblue;
+}
+
+
+#login-page {
+    align-items: center;
+}
+
+.list-group {
+    width: 100%;
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: inline;
+  }
+
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-right: 1px solid rgba(0, 0, 0, 0.8);
+    border-left: 1px solid rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    height: 1px;
+    text-align: center;
+    overflow: hidden;
+   
+  }
+
+  .grid-item-times {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-right: 1px solid rgba(0, 0, 0, 0.8);
+    border-left: 1px solid rgba(0, 0, 0, 0.8);
+    height: 1px;
+    text-align: center;
+  }
+
+  .grid-item-event {
+    background-color: #b9a9f6;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    font-size: 1vw;
+    text-align: center;
+    color: black;
+  }
+
+
+  .grid-item-middle {
+    background-color: #b9a9f6;
+    color: #b9a9f6;
+    border-right: 1px solid rgba(0, 0, 0, 0.8);
+    border-left: 1px solid rgba(0, 0, 0, 0.8);
+    height: 1px;
+    text-align: center;
+  }
+
+  .grid-item-top {
+    background-color: black;
+    border-right: 1px solid rgba(0, 0, 0, 0.8);
+    border-left: 1px solid rgba(0, 0, 0, 0.8);
+    height: 1px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .grid-item-bottom {
+    background-color: black;
+    color: #b9a9f6;
+    border-right: 1px solid rgba(0, 0, 0, 0.8);
+    border-left: 1px solid rgba(0, 0, 0, 0.8);
+    height: 1px;
+    text-align: center;
+  }
+
+  #calendar {
+    margin:4px, 4px;
+    overflow-x: hidden;
+    height: 700px;
+    overflow-y: auto;
+    text-align:justify;
+    border-right: 1px solid rgba(0, 0, 0, 0.8);
+  }
+
+  #times{
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  h5{
+    font-size: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+  h4{
+    text-align: center;
+  }

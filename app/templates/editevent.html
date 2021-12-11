@@ -1,0 +1,42 @@
+{% include "base.html" %}
+
+<body>
+    <form action="/calendars/{{ eventid }}" method="post">
+        <fieldset>
+            <legend>Edit Event</legend>
+            {{ editform.hidden_tag() }}
+            <p>
+                {{ editform.name.label }}<br>
+                {{ editform.name(size=32) }}<br>
+            </p>
+            <p>
+                {{ editform.dow.label }}<br>
+                {{ editform.dow }}<br>
+            </p>
+            <p>
+                {{ editform.start.label }}<br>
+                {{ editform.start }}<br>
+            </p>
+            <p>
+                {{ editform.end.label }}<br>
+                {{ editform.end }}<br>
+            </p>
+            <p>
+                {{ editform.notification.label }}<br>
+                {{ editform.notification }}<br>
+            </p>
+            <p>
+                {{ editform.delete2.label }}<br>
+                {{ editform.delete2 }}<br>
+            </p>
+    
+            {% for error in get_flashed_messages() %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+    
+            <p> {{ editform.submit2() }} </p>
+        </fieldset>
+    </form>
+</body>
+
+

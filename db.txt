@@ -1,0 +1,38 @@
+CREATE TABLE User (
+id integer not null primary key,
+username varchar(64),
+password_hash varchar(128),
+name text not null,
+email varchar(120) not null, 
+confirmation_code integer, 
+email_confirmed bit
+);
+
+CREATE TABLE calendars (
+UserID integer not null,
+CalendarID integer not null primary key,
+Name varchar(64) not null
+);
+
+CREATE TABLE events (
+CalendarID integer not null,
+EventID integer not null primary key,
+DOW integer not null,
+start_time time,
+end_time time,
+Name varchar(64) not null,
+notification varchar(1)
+);
+
+CREATE TABLE Share (
+calendarid Integer,
+friendid integer,
+primary key (calendarid, friendid)
+);
+
+CREATE TABLE Reset (
+UserID integer primary_key, 
+reset_code integer not null, 
+timestamp time not null,
+date date not null
+);

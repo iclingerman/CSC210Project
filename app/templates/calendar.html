@@ -1,0 +1,130 @@
+{% include "base.html" %}
+
+<head>
+    <title>{{ title }} | EZWeek</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='scripts.js') }}"></script>
+</head>
+
+<body>
+    <h3>{{ calendarname }}</h3>
+    <div class="container-fluid justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-10" id=calendar>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Times</h4>
+                            {% for i in range(0,1440) %}
+                            {% if i%60==0 %}
+                                {% if i/60 > 12 %}
+                                <div class="grid-item-times" id="times" style="background-color: #b9a9f6"> {{ (((i/60)-12)|round(2)|string).rstrip('0').rstrip('.') }}:00</div>
+                                {% elif i/60 == 0 %}
+                                <div class="grid-item-times" id="times" style="background-color: #b9a9f6"> {{ (12|round(2)|string).rstrip('0').rstrip('.') }}:00</div>
+                                {% else %}
+                                <div class="grid-item-times" id="times" style="background-color: #b9a9f6"> {{ ((i/60)|round(2)|string).rstrip('0').rstrip('.') }}:00</div>
+                                {% endif %}
+                            {% else %}
+                                {% if i == 1439 %}
+                                <div class="grid-item-times" id="times" style="background-color: black"> </div>
+                                {% else %}
+                                <div class="grid-item-times" id="times"></div>
+                                {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="col" id="sunday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Sunday</h4>
+                        </div>
+                        <div class="col" id="monday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Monday</h4>
+                        </div>  
+                        <div class="col" id="tuesday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Tuesday</h4>
+                        </div>
+                        <div class="col" id="wednesday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Wednesday</h4>
+                        </div>
+                        <div class="col" id="thursday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Thursday</h4>
+                        </div>
+                        <div class="col" id="friday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Friday</h4>
+                        </div>
+                        <div class="col" id="saturday">
+                            <h4 style="position: sticky; top: 0; background-color: white;">Saturday</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                {% if current_user.id == calendar.userid %}
+                <form action="/calendars/{{ current_user.username }}/{{ calendar.name }}" method="post" id="eventform">
+                    <fieldset>
+                        <legend>Add Event</legend>
+                        {{ form.hidden_tag() }}
+                        <p>
+                            {{ form.name.label }}<br>
+                            {{ form.name(size=24) }}<br>
+                        </p>
+                        <p>
+                            {{ form.dow.label }}<br>
+                            {{ form.dow(size=7) }}<br>
+                        </p>
+                        <p>
+                            {{ form.start.label }}<br>
+                            {{ form.start }}<br>
+                        </p>
+                        <p>
+                            {{ form.end.label }}<br>
+                            {{ form.end }}<br>
+                        </p>
+                        <p>
+                            {{ form.notification.label }}
+                            {{ form.notification }}<br>
+                        </p>
+            
+                        {% for error in get_flashed_messages(category_filter=["event"]) %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+            
+                        <p> {{ form.submit() }} </p>
+                    </fieldset>
+                </form>
+                <form action="/calendars/{{ current_user.username }}/{{ calendar.name }}" method="post" id="shareform">
+                    <fieldset>
+                        <legend>Share Calendar</legend>
+                        {{ shareform.hidden_tag() }}
+                        {{ shareform.username.label }}<br>
+                        {{ shareform.username(size=24) }}<br>
+                        {% for error in get_flashed_messages(category_filter=["share"]) %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        {{ shareform.submit() }}
+                    </fieldset>
+                </form>
+                <form action="/calendars/{{ current_user.username }}/{{ calendar.name }}" method="post">
+                    <fieldset>
+                        {{ deleteform.hidden_tag() }}
+                        {{ deleteform.delete() }}
+                    </fieldset>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        generateGridLists();
+        var json = JSON.parse('{{events | tojson}}'.slice(1, -1));
+        var user = "{{ username}}";
+        var calendarName = "{{ calendar.name }}";
+        console.log(user);
+        console.log(calendarName);
+        console.log(json);
+        for (let key in json) {
+            createDay(json[key], key, user, calendarName);
+        }
+    </script>
+</body>
